@@ -1,6 +1,6 @@
 import express from "express";
 import { createServer as createViteServer } from "vite";
-import path from "path";
+import * as path from 'path';
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -9,9 +9,6 @@ const __dirname = path.dirname(__filename);
 async function startServer() {
   const app = express();
   const PORT = process.env.PORT || 3000;
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server running on port ${PORT}`);
-});
 
   app.use(express.json());
 
@@ -30,7 +27,7 @@ app.listen(PORT, "0.0.0.0", () => {
     }
 
     const text = `
-🆕 Yangi xabar!
+<b>Yangi xabar!</b>
 👤 Ism: ${name}
 📞 Tel: ${phone}
 💬 Xabar: ${message}
@@ -60,7 +57,7 @@ app.listen(PORT, "0.0.0.0", () => {
     }
   });
 
-  // Vite middleware for development
+  // Vite middleware for development vs production
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       server: { middlewareMode: true },
@@ -68,14 +65,18 @@ app.listen(PORT, "0.0.0.0", () => {
     });
     app.use(vite.middlewares);
   } else {
-    app.use(express.static(path.join(__dirname, "dist")));
+    // Productionda 'dist' papkasidan static fayllarni xizmat qilish
+    // Eslatma: dist ichida client va server fayllari bo'lishi mumkin
+    const clientDist = path.join(__dirname, "../dist"); 
+    app.use(express.static(clientDist));
+    
     app.get("*", (req, res) => {
-      res.sendFile(path.join(__dirname, "dist", "index.html"));
+      res.sendFile(path.join(clientDist, "index.html"));
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+  app.listen(PORT,"0.0.0.0", () => {
+    console.log(`Server running on port ${PORT}`);
   });
 }
 
