@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-brand-black: #050505;
+  --color-brand-dark: #121212;
+  --color-brand-neon: #2424fa;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-black text-white font-sans;
+  }
+}
+
+/* Custom animations */
+@keyframes pulse-neon {
+  0%, 100% { box-shadow: 0 0 5px rgba(36, 36, 250, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(36, 36, 250, 0.8); }
+}
+
+.animate-pulse-neon {
+  animation: pulse-neon 2s infinite;
+}
+
+/* intl-tel-input overrides for dark mode */
+.iti {
+  width: 100%;
+}
+.iti__country-list {
+  background-color: #121212 !important;
+  border: 1px solid #2424fa !important;
+  color: white !important;
+}
+.iti__country:hover {
+  background-color: #2424fa !important;
+}

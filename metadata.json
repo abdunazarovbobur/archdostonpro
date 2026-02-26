@@ -1,0 +1,7 @@
+{
+  "name": "ArchDoston",
+  "description": "Premium interior design studio with interactive portfolio, global presence map, and Telegram-integrated contact system.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
