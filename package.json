@@ -4,11 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build && tsc server.ts --outDir dist --module esnext --moduleResolution node --target esnext",
-    "preview": "vite preview",
-    "start": "node dist/server.js"
-  },
+  "dev": "vite",
+  "build": "vite build && tsc server.ts --outDir dist --module esnext --moduleResolution node --target esnext",
+  "start": "node dist/server.js"
+},
   "dependencies": {
     "express": "^4.17.21"
   },
